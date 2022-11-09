@@ -11,19 +11,54 @@
     <ion-icon name="person-circle" color="primary"></ion-icon>
     <ion-label class="ion-text-wrap">
       <h2>
-        {{ message.fromName }}
+        {{ message.first_name }} {{ message.last_name}}
         <span class="date">
-          <ion-note>{{ message.date }}</ion-note>
+          <ion-note>Job Id : {{ message.job_id }}</ion-note>
+         
         </span>
       </h2>
-      <h3>To: <ion-note>Me</ion-note></h3>
+      
     </ion-label>
   </ion-item>
-  
   <div class="ion-padding">
-    <h1>{{ message.subject }}</h1>
+    <ion-note>Job Title Applied : {{ message.job_title }}</ion-note>
+  </div>
+  <div class="ion-padding">
+    <h1>Current Status - {{ message.stage }}</h1>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      The above mentioned is the latest status of the Candidate
     </p>
   </div>
+  <div class="ion-padding">
+    <h1>To Change Status</h1>
+    <p>Select from the below options</p>
+  </div>
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Status" name="stage" id="id_stage">
+          <ion-select-option value="pending">PENDING</ion-select-option>
+        
+          <ion-select-option value="reviewing" selected="">REVIEWING</ion-select-option>
+        
+          <ion-select-option value="shortlisted">SHORTLISTED</ion-select-option>
+        
+          <ion-select-option value="interviewing">INTERVIEWING</ion-select-option>
+        
+          <ion-select-option value="advanced_interviewing">ADVANCED INTERVIEWING</ion-select-option>
+        
+          <ion-select-option value="rejected_by_company">REJECTED BY COMPANY</ion-select-option>
+        
+          <ion-select-option value="offered">OFFERED</ion-select-option>
+        
+          <ion-select-option value="hired">HIRED</ion-select-option>
+        
+          <ion-select-option value="rejected_by_candidate">REJECTED BY CANDIDATE</ion-select-option>
+        
+          <ion-select-option value="on_hold">ON HOLD</ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
+
