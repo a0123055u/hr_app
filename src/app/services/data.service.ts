@@ -19,7 +19,7 @@ export interface Message {
 })
 export class DataService {
   url = 'http://127.0.0.1:8000/candidate/api/profile?format=json';
-  update_profile_url = "http://localhost:8000/candidate/api/profile/update/";
+  update_profile_url = "http://127.0.0.1:8000/candidate/api/profile/update/";
   public profiles: Message[] = [];
   public profile_slected: Message = {
   first_name: "",
@@ -67,17 +67,21 @@ export class DataService {
   public updateProfileStatus(status: String, id_profile: number){
    if (id_profile  && status){
     const body = {"stage":status};
-    const headers = {
-      "access-control-allow-origin": "http://localhost:8000/",
-      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE',
-    }
-    this.http.put<any>(`${this.update_profile_url}`+id_profile, body, {headers})
+    // const headers = {
+    //   "Access-Control-Allow-Origin": "http://127.0.0.1:8000/",      
+    //   "Access-Control-Allow-Headers": "Content-Type",
+    //   "Access-Control-Allow-Methods": "POST, GET, OPTIONS, DELETE",
+    //   "Access-Control-Max-Age": "86400",
+    //   "Content-Type" : "application/json"
+    // }
+    this.http.put<any>(`${this.update_profile_url}`+id_profile, body)
         .subscribe({
             next: data => {
-                console.log("success "+data);
+                console.log("success "+JSON.stringify(data));
             },
             error: error => {
                 console.error('There was an error!', error);
+                alert(JSON.stringify("status:"+error.status + "message:"+error.message));
             }
         });
 
