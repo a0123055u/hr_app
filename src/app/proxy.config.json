@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://localhost:8000/", // put your actual domain
+      "target": "http://127.0.0.1:8000/", // put your actual domain
       "secure": false, // true or false depending on your needs.
       "logLevel": "debug"
     }

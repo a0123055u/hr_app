@@ -97,12 +97,13 @@ export class ViewMessagePage implements OnInit {
     return o1.id === o2.id;
   }
 
-  handleChange(ev) {
+  handleChange(ev, id) {
     this.currentStatus = ev.target.value;
     let status_payload = JSON.stringify(ev.target.value);
     console.log("ev.target.value"+status_payload);
+    console.log("ev.target"+JSON.stringify(id))
     //TODO - put request of value from json 
-    this.data.updateProfileStatus("on_hold", 17);
+    this.data.updateProfileStatus(this.currentStatus.value, id);
     
   }
 }
