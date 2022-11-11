@@ -33,9 +33,10 @@
     <h1>To Change Status</h1>
     <p>Select from the below options</p>
   </div>
-  <ion-list>
+  <!-- <ion-list>
     <ion-item>
-      <ion-select placeholder="Status" name="stage" id="id_stage">
+      <ion-select placeholder="Status" [compareWith]="compareWith" (ionChange)="handleChange($event)"
+      [multiple]="false" name="stage" id="id_stage" (ionChange)="onChange($event)">
           <ion-select-option value="pending">PENDING</ion-select-option>
         
           <ion-select-option value="reviewing" selected="">REVIEWING</ion-select-option>
@@ -57,6 +58,22 @@
           <ion-select-option value="on_hold">ON HOLD</ion-select-option>
         
       </ion-select>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-list>
+    <ion-item>
+      <ion-select
+        [compareWith]="compareWith"
+        placeholder="Select status of applicant"
+        (ionChange)="handleChange($event)"
+        [multiple]="false"
+      >
+        <ion-select-option *ngFor="let status of statuses" [value]="status">{{ status.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>Current value: {{ currentStatus | json }}</ion-label>
     </ion-item>
   </ion-list>
 
