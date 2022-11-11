@@ -19,7 +19,17 @@ export interface Message {
 })
 export class DataService {
   url = 'http://127.0.0.1:8000/candidate/api/profile?format=json';
+  update_profile_url = "http://localhost:8000/candidate/api/profile/update/";
   public profiles: Message[] = [];
+  public profile_slected: Message = {
+  first_name: "",
+  last_name: "",
+  email: "",
+  job_id: "",
+  stage: "",
+  id: 0,
+  resume: "",
+}
   constructor(private http: HttpClient) {
     this.http.get(this.url).subscribe((profiles: Message[]) => {
       console.log(JSON.stringify(profiles));
@@ -43,5 +53,35 @@ export class DataService {
       }
     }
     return this.profiles[0];
+    // this.http.get(this.url,{params:{id:id_passed},}).subscribe((profiles: Message[]) => {
+    //   console.log(JSON.stringify(profiles));
+    //   let k = JSON.stringify(profiles);
+    //   let final = JSON.parse(k);
+    //   console.log("Parsered "+ final[0])
+    //   this.profile_slected = final[0];
+    //   return this.profile_slected[0]
+    // });
+    // return this.profile_slected[0];
+  }
+
+  public updateProfileStatus(status: String, id_profile: number){
+   if (id_profile  && status){
+    const body = {"stage":status};
+    const headers = {
+      "access-control-allow-origin": "http://localhost:8000/",
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE',
+    }
+    this.http.put<any>(`${this.update_profile_url}`+id_profile, body, {headers})
+        .subscribe({
+            next: data => {
+                console.log("success "+data);
+            },
+            error: error => {
+                console.error('There was an error!', error);
+            }
+        });
+
+   }
+    
   }
 }
